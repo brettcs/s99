@@ -31,4 +31,10 @@ class S99Spec extends FlatSpec {
   "Function length" should "return the length of the list" in {
     (0 to 5).foreach(end => assert(length((1 to end).toList) === end))
   }
+
+  "Function reverse" should "reverse a list" in {
+    (0 to 5).foreach(
+      end => assert(reverse((1 to end).toList) === end.to(1, -1).toList)
+    )
+  }
 }

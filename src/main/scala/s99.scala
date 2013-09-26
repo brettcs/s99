@@ -24,4 +24,9 @@ object S99 {
     case Nil => count
     case _ :: tail => length(tail, count + 1)
   }
+
+  def reverse[A](list: List[A]): List[A] = list match {
+    case Nil => Nil
+    case head :: tail => reverse(tail) ++ List(head)
+  }
 }
