@@ -34,4 +34,10 @@ object S99 {
     val end = list.length - 1
     !0.to(end).map(i => list(i) == list(end - i)).contains(false)
   }
+
+  def flatten(list: List[Any]): List[Any] = list match {
+    case Nil => Nil
+    case (head: List[Any]) :: tail => flatten(head) ::: flatten(tail)
+    case head :: tail => List(head) ::: flatten(tail)
+  }
 }

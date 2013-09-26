@@ -48,4 +48,12 @@ class S99Spec extends FlatSpec {
     assert(!isPalindrome(List(2, 5, 4, 2)))
     assert(!isPalindrome(List(2, 3)))
   }
+
+  "Function flatten" should "flatten nested lists" in {
+    assert(flatten(List()) === List())
+    val result = List(1, 2, 3)
+    assert(flatten(result) === result)
+    assert(flatten(List(List(1, 2), 3)) === result)
+    assert(flatten(List(List(1, List(2)), 3)) === result)
+  }
 }
