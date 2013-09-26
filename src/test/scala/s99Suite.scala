@@ -37,4 +37,15 @@ class S99Spec extends FlatSpec {
       end => assert(reverse((1 to end).toList) === end.to(1, -1).toList)
     )
   }
+
+  "Function isPalindrome" should "find palindromes" in {
+    assert(isPalindrome(List()))
+    assert(isPalindrome(List(2)))
+    assert(isPalindrome(List(2, 5, 2)))
+    assert(isPalindrome(List(2, 5, 5, 2)))
+    assert(isPalindrome(List(2, 5, 9, 5, 2)))
+    assert(!isPalindrome(List(2, 5, 9, 4, 2)))
+    assert(!isPalindrome(List(2, 5, 4, 2)))
+    assert(!isPalindrome(List(2, 3)))
+  }
 }

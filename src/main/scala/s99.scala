@@ -29,4 +29,9 @@ object S99 {
     case Nil => Nil
     case head :: tail => reverse(tail) ++ List(head)
   }
+
+  def isPalindrome(list: List[Any]): Boolean = {
+    val end = list.length - 1
+    !0.to(end).map(i => list(i) == list(end - i)).contains(false)
+  }
 }
