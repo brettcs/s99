@@ -38,6 +38,6 @@ object S99 {
   def flatten(list: List[Any]): List[Any] = list match {
     case Nil => Nil
     case (head: List[Any]) :: tail => flatten(head) ::: flatten(tail)
-    case head :: tail => List(head) ::: flatten(tail)
+    case head :: tail => head :: flatten(tail)
   }
 }
