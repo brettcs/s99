@@ -56,4 +56,15 @@ class S99Spec extends FlatSpec {
     assert(flatten(List(List(1, 2), 3)) === result)
     assert(flatten(List(List(1, List(2)), 3)) === result)
   }
+
+  "Function compress" should "remove duplicates run together" in {
+    assert(compress(List()) === List())
+    val result = List(1, 2, 3)
+    assert(compress(result) === result)
+    assert(compress(List(1, 1, 2, 3)) === result)
+    assert(compress(List(1, 2, 2, 3)) === result)
+    assert(compress(List(1, 2, 3, 3)) === result)
+    assert(compress(List(1, 1, 2, 2, 3, 3)) === result)
+    assert(compress(List(1, 1, 2, 2, 1, 3, 3)) === List(1, 2, 1, 3))
+  }
 }

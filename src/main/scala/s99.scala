@@ -40,4 +40,10 @@ object S99 {
     case (head: List[Any]) :: tail => flatten(head) ::: flatten(tail)
     case head :: tail => head :: flatten(tail)
   }
+
+  def compress[A](list: List[A]): List[A] = list match {
+    case Nil => Nil
+    case x :: y :: tail if x == y => compress(y :: tail)
+    case x :: tail => x :: compress(tail)
+  }
 }
