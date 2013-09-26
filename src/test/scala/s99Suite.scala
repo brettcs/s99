@@ -16,4 +16,15 @@ class S99Spec extends FlatSpec {
       penultimate(List(1))
     }
   }
+
+  "Function nth" should "return the corresponding index" in {
+    val l = (0 to 5).map(n => n * n).toList
+    (0 to 5).foreach(n => assert(nth(n, l) === (n * n)))
+  }
+
+  it should "raise an exception past the end of the list" in {
+    intercept[NoSuchElementException] {
+      nth(1, List())
+    }
+  }
 }
