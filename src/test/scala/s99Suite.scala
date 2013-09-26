@@ -27,4 +27,8 @@ class S99Spec extends FlatSpec {
       nth(1, List())
     }
   }
+
+  "Function length" should "return the length of the list" in {
+    (0 to 5).foreach(end => assert(length((1 to end).toList) === end))
+  }
 }

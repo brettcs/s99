@@ -19,4 +19,9 @@ object S99 {
     case (0, x :: _) => x
     case (i, _ :: tail) => nth(i - 1, tail)
   }
+
+  def length(list: List[Any], count: Int = 0): Int = list match {
+    case Nil => count
+    case _ :: tail => length(tail, count + 1)
+  }
 }
