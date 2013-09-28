@@ -84,4 +84,30 @@ class S99Spec extends FlatSpec {
     	   === List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a),
     		    List('d), List('e, 'e, 'e, 'e)))
   }
+
+  "Function slice" should "return sublists" in {
+    val list = 1.to(5).toList
+    assert(slice(0, 3, list) === List(1, 2, 3))
+    assert(slice(1, 4, list) === List(2, 3, 4))
+    assert(slice(2, 5, list) === List(3, 4, 5))
+  }
+
+  it should "support negative indices" in {
+    val list = 1.to(5).toList
+    assert(slice(-2, 0, list) === List(4, 5))
+    assert(slice(-3, 0, list) === List(3, 4, 5))
+    assert(slice(1, -1, list) === List(2, 3, 4))
+  }
+
+  it should "raise an exception out of bounds" in {
+    intercept[IndexOutOfBoundsException] {
+      slice(0, 1, Nil)
+    }
+    intercept[IndexOutOfBoundsException] {
+      slice(1, 2, List(1))
+    }
+    intercept[IndexOutOfBoundsException] {
+      slice(0, 2, List(1))
+    }
+  }
 }

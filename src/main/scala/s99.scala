@@ -1,3 +1,5 @@
+import java.lang.Math.abs
+
 object S99 {
   def last[A](list: List[A]): A = {
     list match {
@@ -52,5 +54,14 @@ object S99 {
     case x :: y :: tail if x == y => pack(y :: tail, head_tally + 1)
     case head :: tail =>
       (0.to(head_tally).map(x => head)).toList :: pack(tail, 0)
+  }
+
+  def slice[A](start: Int, stop: Int, list: List[A]): List[A] = {
+    val length = list.length
+    if ((abs(start) > length) || (abs(stop) > length))
+      throw new IndexOutOfBoundsException
+    val i_start = (length + start) % length
+    val i_stop = (length + stop - 1) % length
+    (for (index <- i_start to i_stop) yield list(index)).toList
   }
 }
