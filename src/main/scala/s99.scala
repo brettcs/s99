@@ -64,4 +64,13 @@ object S99 {
     val i_stop = (length + stop - 1) % length
     (for (index <- i_start to i_stop) yield list(index)).toList
   }
+
+  def rotate[A](count: Int, list: List[A]): List[A] = {
+    if (list == Nil)
+      Nil
+    else if ((count % list.length) == 0)
+      list
+    else
+      slice(count, 0, list) ::: slice(0, count, list)
+  }
 }

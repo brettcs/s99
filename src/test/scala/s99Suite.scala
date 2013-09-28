@@ -110,4 +110,14 @@ class S99Spec extends FlatSpec {
       slice(0, 2, List(1))
     }
   }
+
+  "Function rotate" should "rotate the given list" in {
+    val list = (1 to 5).toList
+    assert(rotate(0, list) === list)
+    assert(rotate(1, list) === List(2, 3, 4, 5, 1))
+    assert(rotate(2, list) === List(3, 4, 5, 1, 2))
+    assert(rotate(3, list) === List(4, 5, 1, 2, 3))
+    assert(rotate(4, list) === List(5, 1, 2, 3, 4))
+    assert(rotate(5, list) === List(1, 2, 3, 4, 5))
+  }
 }
