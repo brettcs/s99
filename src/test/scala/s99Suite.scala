@@ -67,4 +67,21 @@ class S99Spec extends FlatSpec {
     assert(compress(List(1, 1, 2, 2, 3, 3)) === result)
     assert(compress(List(1, 1, 2, 2, 1, 3, 3)) === List(1, 2, 1, 3))
   }
+
+  "Function pack" should "wrap non-dupe elements in Lists" in {
+    List(List(), List(1), List(2, 3, 4), List(2, 3, 2)).foreach(in_list =>
+      assert(pack(in_list) === in_list.map(n => List(n)).toList)
+    )
+  }
+
+  it should "list duplicates together" in {
+    assert(pack(List(1, 1, 1)) === List(List(1, 1, 1)))
+    assert(pack(List(1, 1, 2)) === List(List(1, 1), List(2)))
+    assert(pack(List(1, 1, 2, 2)) === List(List(1, 1), List(2, 2)))
+    assert(pack(List(1, 2, 2, 3)) === List(List(1), List(2, 2), List(3)))
+    assert(pack(List(1, 2, 2, 2)) === List(List(1), List(2, 2, 2)))
+    assert(pack(List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e))
+    	   === List(List('a, 'a, 'a, 'a), List('b), List('c, 'c), List('a, 'a),
+    		    List('d), List('e, 'e, 'e, 'e)))
+  }
 }

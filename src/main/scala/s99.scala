@@ -46,4 +46,11 @@ object S99 {
     case x :: y :: tail if x == y => compress(y :: tail)
     case x :: tail => x :: compress(tail)
   }
+
+  def pack[A](list: List[A], head_tally: Int = 0): List[List[A]] = list match {
+    case Nil => Nil
+    case x :: y :: tail if x == y => pack(y :: tail, head_tally + 1)
+    case head :: tail =>
+      (0.to(head_tally).map(x => head)).toList :: pack(tail, 0)
+  }
 }
