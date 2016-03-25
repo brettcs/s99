@@ -17,24 +17,24 @@
 import java.lang.Math.abs
 
 object S99 {
-  def last[A](list: List[A]): A = {
+  def last[A](list: List[A]): Option[A] = {
     list match {
-      case Nil => throw new NoSuchElementException
-      case x :: Nil => x
+      case Nil => None
+      case x :: Nil => Some(x)
       case _ :: tail => last(tail)
     }
   }
 
-  def penultimate[A](list: List[A]): A = list match {
-    case Nil => throw new NoSuchElementException
-    case _ :: Nil => throw new NoSuchElementException
-    case x :: _ :: Nil => x
+  def penultimate[A](list: List[A]): Option[A] = list match {
+    case Nil => None
+    case _ :: Nil => None
+    case x :: _ :: Nil => Some(x)
     case _ :: tail => penultimate(tail)
   }
 
-  def nth[A](index: Int, list: List[A]):A = (index, list) match {
-    case (_, Nil) => throw new NoSuchElementException
-    case (0, x :: _) => x
+  def nth[A](index: Int, list: List[A]): Option[A] = (index, list) match {
+    case (_, Nil) => None
+    case (0, x :: _) => Some(x)
     case (i, _ :: tail) => nth(i - 1, tail)
   }
 

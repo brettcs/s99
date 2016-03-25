@@ -20,28 +20,30 @@ class S99Spec extends FlatSpec {
   import S99._
 
   "Function last" should "return the last element of a list" in {
-    1 to 10 foreach(max => assert(last((1 to max).toList) === max))
+    1 to 10 foreach(max => assert(last((1 to max).toList) === Some(max)))
+  }
+
+  it should "return None for an empty list" in {
+    assert(last(List()) === None)
   }
 
   "Function penultimate" should "return the second-last element of a list" in {
-    2 to 10 foreach(max => assert(penultimate((1 to max).toList) === (max - 1)))
+    2 to 10 foreach(
+      max => assert(penultimate((1 to max).toList) === Some(max - 1))
+    )
   }
 
-  it should "throw an exception for a too-short list" in {
-    intercept[NoSuchElementException] {
-      penultimate(List(1))
-    }
+  it should "return None for a too-short list" in {
+    assert(penultimate(List(1)) === None)
   }
 
   "Function nth" should "return the corresponding index" in {
     val l = (0 to 5).map(n => n * n).toList
-    (0 to 5).foreach(n => assert(nth(n, l) === (n * n)))
+    (0 to 5).foreach(n => assert(nth(n, l) === Some(n * n)))
   }
 
-  it should "raise an exception past the end of the list" in {
-    intercept[NoSuchElementException] {
-      nth(1, List())
-    }
+  it should "return None past the end of the list" in {
+    assert(nth(1, List()) === None)
   }
 
   "Function length" should "return the length of the list" in {
