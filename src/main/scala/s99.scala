@@ -72,19 +72,17 @@ object S99 {
 
   def slice[A](start: Int, stop: Int, list: List[A]): List[A] = {
     val length = list.length
-    if ((abs(start) > length) || (abs(stop) > length))
-      throw new IndexOutOfBoundsException
-    val i_start = (length + start) % length
-    val i_stop = (length + stop - 1) % length
-    (for (index <- i_start to i_stop) yield list(index)).toList
+    def boundIndex(i: Int): Int =
+      if (i < 0)
+        (length + i).max(0)
+      else
+        i
+    val boundStart = boundIndex(start)
+    list.drop(boundStart).take(boundIndex(stop) - boundStart)
   }
 
   def rotate[A](count: Int, list: List[A]): List[A] = {
-    if (list == Nil)
-      Nil
-    else if ((count % list.length) == 0)
-      list
-    else
-      slice(count, 0, list) ::: slice(0, count, list)
+    val length = list.length
+    slice(count, length, list) ::: slice(0, count, list)
   }
 }

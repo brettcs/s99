@@ -112,21 +112,15 @@ class S99Spec extends FlatSpec {
 
   it should "support negative indices" in {
     val list = 1.to(5).toList
-    assert(slice(-2, 0, list) === List(4, 5))
-    assert(slice(-3, 0, list) === List(3, 4, 5))
+    assert(slice(-2, 5, list) === List(4, 5))
+    assert(slice(-3, 5, list) === List(3, 4, 5))
     assert(slice(1, -1, list) === List(2, 3, 4))
   }
 
-  it should "raise an exception out of bounds" in {
-    intercept[IndexOutOfBoundsException] {
-      slice(0, 1, Nil)
-    }
-    intercept[IndexOutOfBoundsException] {
-      slice(1, 2, List(1))
-    }
-    intercept[IndexOutOfBoundsException] {
-      slice(0, 2, List(1))
-    }
+  it should "return Nil out of bounds" in {
+    assert(slice(0, 1, Nil) === Nil)
+    assert(slice(1, 2, List(1)) === Nil)
+    assert(slice(0, -2, List(1)) === Nil)
   }
 
   "Function rotate" should "rotate the given list" in {
