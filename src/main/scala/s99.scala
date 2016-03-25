@@ -48,10 +48,8 @@ object S99 {
     case head :: tail => reverse(tail) ++ List(head)
   }
 
-  def isPalindrome(list: List[Any]): Boolean = {
-    val end = list.length - 1
-    !0.to(end).map(i => list(i) == list(end - i)).contains(false)
-  }
+  def isPalindrome[A](list: List[A]): Boolean =
+    list.iterator.zip(list.reverseIterator).forall { case (a, b) => a == b }
 
   def flatten(list: List[Any]): List[Any] = list match {
     case Nil => Nil
