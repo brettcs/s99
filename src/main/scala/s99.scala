@@ -85,4 +85,10 @@ object S99 {
     val length = list.length
     slice(count, length, list) ::: slice(0, count, list)
   }
+
+  def removeAt(index: Int, list: List[Any]): List[Any] = (index, list) match {
+    case (_, Nil) => Nil
+    case (0, _ :: tail) => tail
+    case (n, x :: tail) => x :: removeAt(n - 1, tail)
+  }
 }

@@ -132,4 +132,14 @@ class S99Spec extends FlatSpec {
     assert(rotate(4, list) === List(5, 1, 2, 3, 4))
     assert(rotate(5, list) === List(1, 2, 3, 4, 5))
   }
+
+  "Function removeAt" should "remove the nth element of the list" in {
+    val list = (1 to 5).toList
+    assert(removeAt(0, list) === List(2, 3, 4, 5))
+    assert(removeAt(1, list) === List(1, 3, 4, 5))
+    assert(removeAt(2, list) === List(1, 2, 4, 5))
+    assert(removeAt(3, list) === List(1, 2, 3, 5))
+    assert(removeAt(4, list) === List(1, 2, 3, 4))
+    assert(removeAt(5, list) === list)
+  }
 }
